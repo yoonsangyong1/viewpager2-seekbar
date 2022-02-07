@@ -16,7 +16,7 @@ class VpAdapter : RecyclerView.Adapter<VpHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 5*1000
     }
 
     fun setItem() {

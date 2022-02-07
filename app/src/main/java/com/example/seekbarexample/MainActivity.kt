@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         val displayMetrics = displayMetrics()
         indicatorSize = (displayMetrics.widthPixels - 30.dpTopx) / itemCount
         maxOffset = displayMetrics.widthPixels
-        smallSizeIndicator = customView(Color.parseColor("#000000"), Color.parseColor("#000000"), 12, indicatorSize)
-        bigSizeIndicator = customView(Color.parseColor("#000000"), Color.parseColor("#000000"), 20, indicatorSize + 2.dpTopx)
+        smallSizeIndicator = customView(Color.BLACK, Color.BLACK, 2, indicatorSize)
+        bigSizeIndicator = customView(Color.BLACK, Color.BLACK, 4, indicatorSize + 2.dpTopx)
         sk = findViewById(R.id.seekBar)
         sk.thumb = smallSizeIndicator
         sk.max = (itemCount - 1) * progressCalculate
@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = VpAdapter()
         vp.adapter = adapter
         adapter.setItem()
+        vp.setCurrentItem(itemCount*500, false)
 
         vp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
@@ -66,8 +67,9 @@ class MainActivity : AppCompatActivity() {
                 positionOffsetPixels: Int
             ) {
                 if (!seekBarTouch) {
-                    currentOffset = ((maxOffset / progressCalculate) * (position * progressCalculate))
-                    sk.progress = ((positionOffset*40)+(position*40)).toInt()
+                    currentOffset = ((maxOffset / progressCalculate) * ((position%itemCount) * progressCalculate))
+                    sk.progress = ((positionOffset*progressCalculate)+((position%itemCount)*progressCalculate)).toInt()
+                    Log.d("hoorrr==", (position%itemCount).toString())
                 }
             }
 
@@ -114,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         shape.shape = GradientDrawable.LINE
         shape.cornerRadii = floatArrayOf(8f, 8f, 8f, 8f, 0f, 0f, 0f, 0f)
         shape.setColor(backgroundColor)
-        shape.setStroke(stroke, borderColor)
+        shape.setStroke(stroke.dpTopx, borderColor)
         shape.setSize(indicatorWidth, 13.dpTopx)
         return shape
     }
