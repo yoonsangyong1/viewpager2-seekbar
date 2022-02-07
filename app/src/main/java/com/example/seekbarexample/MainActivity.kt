@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                 if (!seekBarTouch) {
                     currentOffset = ((maxOffset / progressCalculate) * ((position%itemCount) * progressCalculate))
                     sk.progress = ((positionOffset*progressCalculate)+((position%itemCount)*progressCalculate)).toInt()
-                    Log.d("hoorrr==", (position%itemCount).toString())
                 }
             }
 
