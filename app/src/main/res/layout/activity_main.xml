@@ -19,23 +19,28 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:background="#d5d5d5"
-        app:layout_constraintBottom_toBottomOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/seekBar" />
+        app:layout_constraintTop_toTopOf="@+id/seekBar"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar"/>
 
     <com.example.seekbarexample.SmoothSeekBar
         android:id="@+id/seekBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="30dp"
         android:background="@null"
         android:progressDrawable="@drawable/seekbar_background"
         android:splitTrack="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/progressGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="seekBar, progressBackground"/>
 
     <!-- <View
          android:layout_width="wrap_content"
@@ -58,6 +63,29 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#eeeeee"
-        app:layout_constraintTop_toBottomOf="@+id/vp2" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+    <Button
+        android:id="@+id/bigAnim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="크게"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewEx" />
+
+    <Button
+        android:id="@+id/smallAnim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작게"
+        app:layout_constraintStart_toEndOf="@+id/bigAnim"
+        app:layout_constraintTop_toBottomOf="@+id/viewEx" />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

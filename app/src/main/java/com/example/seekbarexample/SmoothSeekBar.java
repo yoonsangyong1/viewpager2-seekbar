@@ -58,7 +58,7 @@ public class SmoothSeekBar extends AppCompatSeekBar implements SeekBar.OnSeekBar
     @Override
     public void setProgress(final int progress) {
         super.setProgress(progress);
-        /*final int currentProgress = getProgress();
+        final int currentProgress = getProgress();
         if (mAnimator != null) {
             mAnimator.cancel();
             mAnimator.removeAllUpdateListeners();
@@ -92,7 +92,7 @@ public class SmoothSeekBar extends AppCompatSeekBar implements SeekBar.OnSeekBar
                 super.onAnimationStart(animation);
             }
         });
-        mAnimator.start();*/
+        mAnimator.start();
     }
 
     @Override
