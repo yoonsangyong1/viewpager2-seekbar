@@ -1,7 +1,5 @@
 package com.example.seekbarexample
 
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.app.Activity
 import android.content.res.Resources
 import android.graphics.Color
@@ -11,16 +9,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.MotionEvent
-import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-import kotlin.concurrent.timerTask
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     var smallSizeIndicator: Drawable? = null
     var bigSizeIndicator: Drawable? = null
     var bannerScrollCheck = false
-    var time: Timer? = null
     var handler: Handler = Handler(Looper.getMainLooper())
     var runnable: Runnable? = null
 
@@ -57,20 +50,14 @@ class MainActivity : AppCompatActivity() {
 
     fun timeTask() {
         runnable = Runnable {
-            if (!bannerScrollCheck) sk.thumb = smallSizeIndicator
+            if (!bannerScrollCheck) {
+                sk.animate().duration = 3000
+                sk.animate().scaleY(1f).start()
+            }
         }
         runnable?.let {
             handler.postDelayed(it, 3000)
         }
-
-        val timerTask = timerTask {
-            Runnable {
-                Log.d("배너falg = ", bannerScrollCheck.toString())
-                if (!bannerScrollCheck) sk.thumb = smallSizeIndicator
-            }
-        }
-        //time = Timer()
-        //time?.schedule(timerTask, 2000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         indicatorSize = (displayMetrics.widthPixels - 30.dpTopx) / itemCount
         maxOffset = displayMetrics.widthPixels
         smallSizeIndicator = customView(Color.BLACK, Color.BLACK, 2, indicatorSize)
-        bigSizeIndicator = customView(Color.BLACK, Color.BLACK, 4, indicatorSize + 2.dpTopx)
         sk = findViewById(R.id.seekBar)
         sk.thumb = smallSizeIndicator
         sk.max = (itemCount - 1) * progressCalculate
@@ -117,15 +103,8 @@ class MainActivity : AppCompatActivity() {
                         handler.removeCallbacks(it)
                     }
                     timeTask()
-                    //sk.thumb = smallSizeIndicator
                 } else {
-                    /*val smal = smallSizeIndicator
-                    val animator = ObjectAnimator.ofFloat(smal, "scaleY", 2f, 2f)
-                    animator.target = smal
-                    animator.duration = 3000*/
-                    sk.thumb = bigSizeIndicator
-
-                   // animator.start()
+                    sk.scaleY = 2f
                 }
             }
         })
@@ -179,7 +158,6 @@ class MainActivity : AppCompatActivity() {
         shape.setColor(backgroundColor)
         shape.setStroke(stroke.dpTopx, borderColor)
         shape.setSize(indicatorWidth, 6.dpTopx)
-
         return shape
     }
 

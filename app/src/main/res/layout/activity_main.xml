@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@null"
-        android:progressDrawable="@drawable/seekbar_background"
+        android:progressDrawable="@null"
         android:splitTrack="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
